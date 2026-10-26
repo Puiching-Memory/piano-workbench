@@ -1,0 +1,43 @@
+{
+  "engine": "TinySoundFont via tinysoundfont 0.3.7",
+  "midi": {
+    "file": "performance_pedal_baked.mid",
+    "sha256": "25959c997955199a1aa394f373f7ea23cff032d898793adf73909262f843fb16",
+    "notes": 56,
+    "ticks_per_beat": 480,
+    "duration_seconds": 21.428575999999993,
+    "last_note_off_seconds": 21.250004499999992,
+    "channels": [
+      0
+    ],
+    "pitch_range": [
+      29,
+      74
+    ],
+    "velocity_range": [
+      43,
+      70
+    ],
+    "sustain_messages": 0,
+    "tempo_changes": 2
+  },
+  "soundfont": "SalamanderGrandPiano-V3+20200602.sf2",
+  "soundfont_sha256": "712d0e681efbe5203a8014e9b3e84168f1908c82f2f6fb13bd2c77d6d72c70b7",
+  "preset_name": "Instrument",
+  "bank": 0,
+  "preset": 0,
+  "sample_rate": 44100,
+  "channels": 2,
+  "format": "PCM16 WAV",
+  "duration_seconds": 27.428571428571427,
+  "release_tail_seconds": 6,
+  "synth_gain_db": -12,
+  "peak_before_safety_gain": 0.09061168879270554,
+  "constant_safety_gain": 1.0,
+  "peak_after_safety_gain": 0.09061168879270554,
+  "control_messages_forwarded": 0,
+  "pitch_bends_forwarded": 0,
+  "program_changes_overridden": 0,
+  "processing": "Original MIDI timing, velocity and controllers; explicit SF2 preset overrides program changes. No added EQ/reverb/compression.",
+  "output_sha256": "41f6d8cb9d9b7653003769eb9a3e4b48ff30768e5896a54842e968d91f0aa065"
+}

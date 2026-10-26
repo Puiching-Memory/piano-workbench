@@ -1,0 +1,28 @@
+{
+  "name": "Warm piano starting point",
+  "format": "human-readable settings, NOT an importable FL Studio preset",
+  "instrument": "FLEX / Core Pianos / KEY Bosendorfer",
+  "routing": "single enabled piano -> dedicated Mixer Insert -> Master",
+  "eq": {
+    "plugin": "Fruity Parametric EQ 2",
+    "bands": [
+      {"type": "high_pass", "frequency_hz": 35},
+      {"type": "peaking", "frequency_hz": 136, "gain_db": 1.3},
+      {"type": "peaking", "frequency_hz": 336, "gain_db": -1.2},
+      {"type": "peaking", "frequency_hz": 2937, "gain_db": -1.7},
+      {"type": "high_shelf", "frequency_hz": 6315, "gain_db": -1.7}
+    ],
+    "note": "Rounded UI readings; unmeasured slopes/bandwidths unspecified. Other bands unchanged."
+  },
+  "reverb": {
+    "plugin": "Fruity Reeverb 2",
+    "predelay_ms": 24,
+    "decay_seconds": 1.8,
+    "low_cut_hz": 220,
+    "wet_percent": 18,
+    "early_reflections_percent": 24,
+    "other_controls": "plugin initial settings"
+  },
+  "additional_compressor": false,
+  "validation": "Starting point from one case; tune by ear using gain-matched exports. Not an automatic mastering preset."
+}

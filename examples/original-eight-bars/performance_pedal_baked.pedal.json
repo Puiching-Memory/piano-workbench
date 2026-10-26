@@ -1,0 +1,12 @@
+{
+  "input": "performance.mid",
+  "output": "performance_pedal_baked.mid",
+  "source_sha256": "79b7dfdbe4beac8aae27c2af567a1b79d92ef3d8da85d9d2942c8e46a99c6037",
+  "notes": 56,
+  "onsets_pitches_channels_velocities_unchanged": true,
+  "notes_extended": 56,
+  "same_pitch_retrigger_clips": 6,
+  "sustain_intervals": 8,
+  "unclosed_pedals_closed_at_end": 0,
+  "limitation": "CC64 note-length approximation; no half-pedal, physical resonance or pedal-noise synthesis. Other messages retained."
+}

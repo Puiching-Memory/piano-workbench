@@ -1,0 +1,9 @@
+{
+  "pages": 1,
+  "note_event_equivalence": true,
+  "events_checked": 56,
+  "pitched_fragments_in_xml": 56,
+  "visible_note_groups_in_svg": 56,
+  "engine": "music21 + Verovio + svglib/ReportLab",
+  "limitation": "Display voices regrouped; preserve original XML. Not an accuracy check and not preservation of all articulations/lyrics/layout."
+}

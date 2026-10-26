@@ -1,0 +1,63 @@
+{
+  "title": "原创八小节：原生踏板与音符长度近似",
+  "requested_target_lufs": -23,
+  "effective_target_lufs": -23.02,
+  "true_peak_ceiling_dbtp": -1.5,
+  "matching": "constant gain only; no compressor or limiter",
+  "target_lowered_for_headroom": false,
+  "note": "Source performance/timbre may differ; matching does not establish transcription accuracy or subjective quality.",
+  "variants": [
+    {
+      "label": "native-cc64",
+      "input": "native-cc64.wav",
+      "input_sha256": "d47cbe03a80a385b16e79a8d44e706c020dab3efa53e83b2fee3eb4d94624cd9",
+      "raw": {
+        "integrated_lufs": -37.68,
+        "true_peak_dbtp": -20.87,
+        "loudness_range_lu": 3.4,
+        "gating_threshold_lufs": -47.74,
+        "duration_seconds": 27.428571,
+        "sample_rate": 44100,
+        "channels": 2
+      },
+      "constant_gain_db": 14.66,
+      "matched": {
+        "integrated_lufs": -23.02,
+        "true_peak_dbtp": -6.21,
+        "loudness_range_lu": 3.4,
+        "gating_threshold_lufs": -33.1,
+        "duration_seconds": 27.428571,
+        "sample_rate": 44100,
+        "channels": 2
+      },
+      "lossless": "native-cc64.flac",
+      "playback": "native-cc64.mp3"
+    },
+    {
+      "label": "note-length-approx",
+      "input": "note-length-approx.wav",
+      "input_sha256": "41f6d8cb9d9b7653003769eb9a3e4b48ff30768e5896a54842e968d91f0aa065",
+      "raw": {
+        "integrated_lufs": -37.37,
+        "true_peak_dbtp": -20.86,
+        "loudness_range_lu": 3.3,
+        "gating_threshold_lufs": -47.43,
+        "duration_seconds": 27.428571,
+        "sample_rate": 44100,
+        "channels": 2
+      },
+      "constant_gain_db": 14.349999999999998,
+      "matched": {
+        "integrated_lufs": -23.02,
+        "true_peak_dbtp": -6.51,
+        "loudness_range_lu": 3.4,
+        "gating_threshold_lufs": -33.1,
+        "duration_seconds": 27.428571,
+        "sample_rate": 44100,
+        "channels": 2
+      },
+      "lossless": "note-length-approx.flac",
+      "playback": "note-length-approx.mp3"
+    }
+  ]
+}

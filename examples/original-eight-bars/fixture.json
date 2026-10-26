@@ -1,0 +1,25 @@
+{
+  "source": "Original synthetic eight-bar fixture; not a transcription result",
+  "license": "MIT for this generated MIDI/MusicXML fixture",
+  "midi": {
+    "file": "performance.mid",
+    "sha256": "79b7dfdbe4beac8aae27c2af567a1b79d92ef3d8da85d9d2942c8e46a99c6037",
+    "notes": 56,
+    "ticks_per_beat": 480,
+    "duration_seconds": 21.428576000000007,
+    "last_note_off_seconds": 21.248516404166672,
+    "channels": [
+      0
+    ],
+    "pitch_range": [
+      29,
+      74
+    ],
+    "velocity_range": [
+      43,
+      70
+    ],
+    "sustain_messages": 16,
+    "tempo_changes": 2
+  }
+}
