@@ -45,6 +45,16 @@ piano-workbench doctor
 
 基础依赖为 NumPy、mido、TinySoundFont 的 Python 封装。不会自动下载模型或音源；用户自行选择 SF2，并保留其来源和许可。
 
+Ubuntu / Debian 安装前需准备系统依赖。`tinysoundfont` 的依赖包含 PyAudio，在 Linux 上编译时需要 PortAudio 头文件；离线渲染也会安装这项依赖：
+
+```bash
+sudo apt-get update
+sudo apt-get install -y portaudio19-dev ffmpeg
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e .
+```
+
 如需音频转谱，先按硬件安装兼容的 PyTorch，再安装上游可选组件：
 
 ```powershell

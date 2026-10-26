@@ -2,6 +2,8 @@
 
 本目录是独立 Git 仓库；发布包包含代码、文档、原创测试曲及已标注来源的试听，不包含模型、SF2 或用户歌曲。
 
+已于 2026-10-26 推送至私有仓库 [Puiching-Memory/piano-workbench](https://github.com/Puiching-Memory/piano-workbench)。当前 CI 结果见该仓库的 Actions；私有内容仅对有访问权限的账户可见。
+
 ## 本地先检查
 
 ```powershell
@@ -23,7 +25,7 @@ gh auth login
 gh repo create piano-workbench --private --source . --remote origin --push
 ```
 
-示例先创建私有仓库。若你已决定公开，可使用 `--public`。发布后检查 GitHub Actions；当前附带的是 CI 配置，创建远程前没有云端运行结果。
+以上命令用于首次发布到自己的账户，现有远程无需重复创建。示例先创建私有仓库。若你已决定公开，可使用 `--public`。发布后检查 GitHub Actions 对应提交的运行结果。
 
 本地初始提交使用 `Piano Workbench contributors` 的自动化标识。如果希望提交归到自己的账户，先配置本仓库的 `user.name` / `user.email`，再按需要调整初始提交作者。
 

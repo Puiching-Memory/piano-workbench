@@ -25,7 +25,9 @@ $env:PIANO_WORKBENCH_TEST_PRESET = "0"
 python -m unittest discover -s tests -v
 ```
 
-没有 SF2 环境变量时，音源集成测试会明确跳过；没有 FFmpeg/ffprobe 时，音频集成测试也会跳过；未安装 `[score]` 时跳过排版测试。GitHub Actions 配置覆盖 Windows/Linux 与 Python 3.11/3.12，**云端 CI 尚未执行**。
+没有 SF2 环境变量时，音源集成测试会明确跳过；没有 FFmpeg/ffprobe 时，音频集成测试也会跳过；未安装 `[score]` 时跳过排版测试。GitHub Actions 覆盖 Windows/Linux 与 Python 3.11/3.12，并另设安装 FFmpeg 和 `[score]` 的 Linux 集成任务；CI 不附带 SF2，也不运行模型推理。云端结果以仓库 [Actions](https://github.com/Puiching-Memory/piano-workbench/actions) 对应提交为准。
+
+首次云端安装暴露了 Linux 上 PyAudio 编译缺少 `portaudio.h` 的问题；CI 与安装说明已补充 `portaudio19-dev`。本地模型集成结果不代表云端 GPU 验证。
 
 ## 已验证的本机组件
 
