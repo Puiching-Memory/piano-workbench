@@ -4,10 +4,11 @@ permissions:
   contents: read
 jobs:
   core:
+    timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-24.04, windows-latest]
         python: ['3.11', '3.12']
     runs-on: ${{ matrix.os }}
     steps:
@@ -17,17 +18,18 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Install Linux audio build dependency
         if: runner.os == 'Linux'
-        run: sudo apt-get update && sudo apt-get install -y portaudio19-dev
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends portaudio19-dev
       - run: python -m pip install -e .
       - run: python -m unittest discover -s tests -v
       - run: piano-workbench doctor
   audio:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: sudo apt-get update && sudo apt-get install -y ffmpeg portaudio19-dev
+      - run: sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg portaudio19-dev
       - run: python -m pip install -e ".[score]"
       - run: python -m unittest discover -s tests -v
