@@ -1,0 +1,14 @@
+Use case: ads-marketing / productivity-visual.
+Asset type: hero banner for the real open-source project GitHub README, landscape 2:1, target 1920x960.
+Primary request: a premium Chinese technology enterprise product launch visual for "Piano Workbench". Elegant restrained enterprise style, white and pearl-gray studio background, warm orange highlights, black typography, luxurious glossy black acoustic grand piano on the upper right, thin translucent performance MIDI and abstract waveform motifs behind the piano. Clean Swiss typography, generous white space, polished realistic product photography, subtle orange glow, no neon cyberpunk.
+Top left exact title: "Piano Workbench".
+Subtitle exact: "从钢琴录音，到乐谱与试听".
+Small English eyebrow: "DuET companion workflow".
+Below the hero, FOUR equally weighted feature cards across the bottom, each with a beautiful realistic miniature illustration and exact text:
+"01 音频转谱" with smaller "DuET / Transkun", miniature waveform and MIDI visualization;
+"02 乐谱排版" with smaller "MusicXML → PDF", miniature score sheets;
+"03 音源试听" with smaller "performance.mid → SF2", miniature piano keys;
+"04 同响度对照" with smaller "固定增益 · 保留动态", miniature A/B playback symbol.
+These cards represent capabilities, NOT a serial signal path: do NOT connect them with arrows.
+A small footer line exact: "FL Studio：可选人工后期".
+Accuracy constraints: Transkun is an independent audio frontend called by the DuET project; do not depict DuET downstream of FL Studio. SF2 rendering uses performance.mid, not score.mid. Banner is an editorial conceptual illustration, NOT a screenshot or actual software UI. Score marks can be illustrative, no known song titles or lyrics. Do not show numerical performance claims, accuracy percentages, actual benchmark data, third-party corporate logos, personal data, external brand emblems, badges, watermarks, fake UI controls. Text must be large enough to read when shown at 900px wide. Align everything to a refined grid.

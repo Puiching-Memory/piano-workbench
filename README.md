@@ -1,19 +1,55 @@
+![Piano Workbench：从钢琴录音，到乐谱与试听；音频转谱、乐谱排版、音源试听、同响度对照](docs/assets/readme-hero.png)
+
 # Piano Workbench
 
 **把钢琴录音整理成可编辑乐谱，并用保留演奏细节的 MIDI 制作可公平比较的试听。**
 
 DuET 配套工作流，面向 Windows 本地运行。把音频转谱、乐谱排版、SF2 音源渲染、DAW 踏板兼容和同响度试听组织在一起。核心工具也可独立使用，无需先安装模型。
 
-当前版本：`0.1.0`，适用于钢琴录音或钢琴演奏 MIDI。经过本地功能与集成验证，仍需更多风格和设备的使用反馈。
+`v0.1.0` · `Python 3.11+` · Windows / Ubuntu 24.04 · [MIT](LICENSE) · [CI 状态](https://github.com/Puiching-Memory/piano-workbench/actions/workflows/tests.yml)
 
-**已有公开示例**：[原创 MIDI / MusicXML](examples/original-eight-bars/)、[乐谱 PDF](examples/score/score.pdf)、[踏板兼容试听页](examples/listening/index.html)。试听页需下载后在浏览器打开；两版都是同一 Salamander 钢琴的真实渲染，比较 CC64 与音符长度近似，详见 [示例说明](examples/README.md)。
+[看实际效果](#实际效果) · [看工作流程](#工作流程) · [安装](#安装) · [快速试用](#5-分钟试用不下载模型) · [FL Studio 教程](docs/fl-studio.md) · [验证记录](docs/verification.md)
 
-## 项目边界
+## 可以做什么
+
+| 你的起点 | Workbench 帮你完成 | 得到什么 |
+| --- | --- | --- |
+| 一段钢琴录音 | 调用 DuET 项目完成识别与制谱，再排版 | 原演奏 MIDI、MusicXML、PDF / SVG |
+| 一份演奏 MIDI | 保留时间、力度和踏板，用自己选择的 SF2 渲染 | WAV 与渲染参数记录 |
+| 两个音源或混音版本 | 测量响度，以固定增益匹配，生成可切换版本的试听页 | FLAC / MP3、HTML、响度报告 |
+| 想在 FL Studio 继续制作 | 生成踏板兼容 MIDI，按教程手动调整音色、EQ 和混响 | 可继续编辑的人工后期流程 |
+
+## 实际效果
+
+下面使用项目原创的**八小节、56 音符**合成测试曲。它可重复生成，未使用用户歌曲，也不是音频识别准确率案例。
+
+### 乐谱：可下载，也可继续编辑
+
+[![原创八小节的实际 Verovio 乐谱预览，含高低音双谱表](docs/assets/score-preview.png)](examples/score/score.pdf)
+
+从仓库内 MusicXML 实际排版的谱面局部。点击图片查看完整 PDF；[下载 MusicXML](examples/score/score.engraved.musicxml) 可在支持的制谱软件中继续编辑。[原演奏 MIDI 与生成说明](examples/original-eight-bars/)
+
+### 试听：同一演奏，在同一位置切换版本
+
+[![实际试听页面：原生 CC64 与音符长度近似两个版本，目标约负 23 LUFS，切换时保留播放位置](docs/assets/listening-preview.png)](examples/listening/index.html)
+
+真实页面截图。下载仓库后打开 [examples/listening/index.html](examples/listening/index.html)，即可试听并切换版本；GitHub 文件页只显示 HTML 源码，不运行播放器。也可以直接下载下方音频。
+
+| 版本 | MP3 试听文件 | 无损 FLAC | 实测响度 | 实测真峰值 |
+| --- | --- | --- | --- | --- |
+| 原生 CC64 踏板 | [native-cc64.mp3](examples/listening/native-cc64.mp3) | [FLAC](examples/listening/native-cc64.flac) | −23.02 LUFS | −6.21 dBTP |
+| 音符长度近似 | [note-length-approx.mp3](examples/listening/note-length-approx.mp3) | [FLAC](examples/listening/note-length-approx.flac) | −23.02 LUFS | −6.51 dBTP |
+
+两版来自**同一 Salamander 钢琴音源**，演示原生踏板和 DAW 导入兼容近似的差别；只调整固定增益，不额外压缩或限幅。此处未展示 FL Studio 混音前后对比。数值见 [测量记录](examples/listening/comparison.json)，音源及录音署名见 [ATTRIBUTION](examples/listening/ATTRIBUTION.md)。
+
+## 工作流程
+
+**一次转谱，两条输出路线：乐谱用于阅读与编辑，原演奏 MIDI 用于音源试听和后期制作。**
 
 ```mermaid
 flowchart TD
   subgraph DUET[DuET 项目：音频到乐谱]
-    A[钢琴音频] --> T[Transkun 可选音频前端]
+    A[钢琴音频] --> T[Transkun：独立的可选音频前端]
     T --> M[performance.mid：原演奏时间、力度、踏板]
     M --> D[DuET 核心制谱模型]
     D --> X[MusicXML / 谱面 MIDI]
@@ -25,7 +61,15 @@ flowchart TD
   M --> B[可选：踏板写入音符长度]
   B --> F[FL Studio 导入与人工后期]
   F --> C
+  classDef source fill:#f4f4f5,stroke:#b8b8bf,color:#18181b
+  classDef model fill:#fff2e7,stroke:#ea650d,color:#742e08
+  classDef output fill:#ecf6f2,stroke:#258271,color:#133f38
+  class A,M,X source
+  class T,D model
+  class P,C,F output
 ```
+
+### 项目边界
 
 - **DuET 项目**调用独立的 Transkun 模型处理音频，然后由 **DuET 核心模型**整理乐谱。这里调用上游，未重写或训练模型。
 - **试听使用 `performance.mid`**。`score.mid` 的谱面节奏和播放速度可能不同，不应拿它代替原演奏来判断音色。
@@ -164,3 +208,5 @@ python -m unittest discover -s tests -v
 - [music21](https://www.music21.org/) / [Verovio](https://www.verovio.org/)：可选乐谱处理与排版。
 
 详见 [第三方说明](THIRD_PARTY_NOTICES.md)。仓库不附带第三方模型权重、SF2、FL Studio、商业歌曲或从商业歌曲识别的乐谱/MIDI。公开示例来源另行标注。
+
+README 封面为 AI 生成的概念插画；乐谱和播放器图片为实际产物截图。图片来源与生成提示词见 [素材说明](docs/assets/README.md)。
