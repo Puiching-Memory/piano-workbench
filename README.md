@@ -19,6 +19,21 @@ DuET 配套工作流，面向 Windows 本地运行。把音频转谱、乐谱排
 | 两个音源或混音版本 | 测量响度，以固定增益匹配，生成可切换版本的试听页 | FLAC / MP3、HTML、响度报告 |
 | 想在 FL Studio 继续制作 | 生成踏板兼容 MIDI，按教程手动调整音色、EQ 和混响 | 可继续编辑的人工后期流程 |
 
+## 工作流程
+
+[![既有制作案例流程图：DuET 项目内由 Transkun 生成演奏 MIDI，再由核心模型制谱；演奏 MIDI 分流进入音源与 FL Studio 人工后期，乐谱另行排版](docs/assets/workflow-overview.png)](docs/assets/workflow-overview.png)
+
+这张图复用此前制作案例的流程海报，点击可查看原图。图中 **121.4 秒 / 477 音符 / 2 页**属于该次案例；下方仓库示例使用另一首原创八小节测试曲。钢琴、谱面、界面与波形为插画示意，FL Studio 步骤由人工完成。
+
+**乐谱用于阅读与编辑，原演奏 `performance.mid` 用于音源试听和后期制作。**
+
+### 项目边界
+
+- **DuET 项目**调用独立的 Transkun 模型处理音频，然后由 **DuET 核心模型**整理乐谱。这里调用上游，未重写或训练模型。
+- **试听使用 `performance.mid`**。`score.mid` 的谱面节奏和播放速度可能不同，不应拿它代替原演奏来判断音色。
+- **PDF 排版与后期制作**是配套工具。FL Studio 部分提供导入教程和参数模板，当前 CLI 不控制 DAW，也不提供通用 GUI 自动混音。
+- 合成示例、文件检查和响度匹配不等于识别准确率评估或人的听音验收。
+
 ## 实际效果
 
 下面使用项目原创的**八小节、56 音符**合成测试曲。它可重复生成，未使用用户歌曲，也不是音频识别准确率案例。
@@ -31,9 +46,7 @@ DuET 配套工作流，面向 Windows 本地运行。把音频转谱、乐谱排
 
 ### 试听：同一演奏，在同一位置切换版本
 
-[![实际试听页面：原生 CC64 与音符长度近似两个版本，目标约负 23 LUFS，切换时保留播放位置](docs/assets/listening-preview.png)](examples/listening/index.html)
-
-真实页面截图。下载仓库后打开 [examples/listening/index.html](examples/listening/index.html)，即可试听并切换版本；GitHub 文件页只显示 HTML 源码，不运行播放器。也可以直接下载下方音频。
+下载仓库后打开 [examples/listening/index.html](examples/listening/index.html)，即可试听并切换版本；GitHub 文件页只显示 HTML 源码，不运行播放器。也可以直接下载下方音频。
 
 | 版本 | MP3 试听文件 | 无损 FLAC | 实测响度 | 实测真峰值 |
 | --- | --- | --- | --- | --- |
@@ -41,40 +54,6 @@ DuET 配套工作流，面向 Windows 本地运行。把音频转谱、乐谱排
 | 音符长度近似 | [note-length-approx.mp3](examples/listening/note-length-approx.mp3) | [FLAC](examples/listening/note-length-approx.flac) | −23.02 LUFS | −6.51 dBTP |
 
 两版来自**同一 Salamander 钢琴音源**，演示原生踏板和 DAW 导入兼容近似的差别；只调整固定增益，不额外压缩或限幅。此处未展示 FL Studio 混音前后对比。数值见 [测量记录](examples/listening/comparison.json)，音源及录音署名见 [ATTRIBUTION](examples/listening/ATTRIBUTION.md)。
-
-## 工作流程
-
-**一次转谱，两条输出路线：乐谱用于阅读与编辑，原演奏 MIDI 用于音源试听和后期制作。**
-
-```mermaid
-flowchart TD
-  subgraph DUET[DuET 项目：音频到乐谱]
-    A[钢琴音频] --> T[Transkun：独立的可选音频前端]
-    T --> M[performance.mid：原演奏时间、力度、踏板]
-    M --> D[DuET 核心制谱模型]
-    D --> X[MusicXML / 谱面 MIDI]
-  end
-  X --> E[music21 / Verovio 排版]
-  E --> P[PDF / SVG]
-  M --> S[SF2 音源渲染]
-  S --> C[固定增益匹配 / 对照试听页]
-  M --> B[可选：踏板写入音符长度]
-  B --> F[FL Studio 导入与人工后期]
-  F --> C
-  classDef source fill:#f4f4f5,stroke:#b8b8bf,color:#18181b
-  classDef model fill:#fff2e7,stroke:#ea650d,color:#742e08
-  classDef output fill:#ecf6f2,stroke:#258271,color:#133f38
-  class A,M,X source
-  class T,D model
-  class P,C,F output
-```
-
-### 项目边界
-
-- **DuET 项目**调用独立的 Transkun 模型处理音频，然后由 **DuET 核心模型**整理乐谱。这里调用上游，未重写或训练模型。
-- **试听使用 `performance.mid`**。`score.mid` 的谱面节奏和播放速度可能不同，不应拿它代替原演奏来判断音色。
-- **PDF 排版与后期制作**是配套工具。FL Studio 部分提供导入教程和参数模板，当前 CLI 不控制 DAW，也不提供通用 GUI 自动混音。
-- 合成示例、文件检查和响度匹配不等于识别准确率评估或人的听音验收。
 
 ## 安装
 
@@ -209,4 +188,4 @@ python -m unittest discover -s tests -v
 
 详见 [第三方说明](THIRD_PARTY_NOTICES.md)。仓库不附带第三方模型权重、SF2、FL Studio、商业歌曲或从商业歌曲识别的乐谱/MIDI。公开示例来源另行标注。
 
-README 封面为 AI 生成的概念插画；乐谱和播放器图片为实际产物截图。图片来源与生成提示词见 [素材说明](docs/assets/README.md)。
+README 封面与流程海报为 AI 插画；乐谱预览来自实际排版产物。图片来源见 [素材说明](docs/assets/README.md)。
